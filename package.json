@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "tailwindcss": "^3.3.2"
+  },
+  "scripts": {
+    "start": "lite-server"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
+    "lite-server": "^2.6.1"
+  }
+}

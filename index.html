@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Horizon</title>
+        <link rel="stylesheet" href="./output.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    </head>
+    
+    <body class="overflow-x-hidden overflow-y-auto bg-stone-950">
+        <nav class="h-16 fixed w-screen top-0 left-0 z-50 backdrop-blur-xl border-b border-b-slate-600/25 flex flex-wrap pr-6 justify-between items-center bg-black/25">
+            <a href="./">
+                <img class="font-poppins font-semibold translate-x-2" style="width: 33px;" srcset="./imgs/Logo.png"></img>
+            </a> 
+
+            <div class="flex gap-4 lg:order-2 text-xs left-64 pl-4">
+                <button id="openbutton2" class="text-white font-poppins hover:text-sky-400 ease-in-out transition-all" >Script</button>
+                <a class="text-white font-poppins hover:text-sky-400 ease-in-out transition-all" href="./">Discord</a>
+            </div>
+        </nav>
+        <span class="md:w-full overflow-x-hidden absolute h-full block -z-[20] justify-center bg-stone-950">
+            <img class="md:w-screen w-full h-screen brightness-50" style="mask-image: none; -webkit-mask-image: linear-gradient(180deg, black, black 80%, transparent 97%);" sizes="100vh" srcset="./imgs/background.jpg">
+        </span>
+        <section id="home" class="relative w-full overflow-x-hidden z-20 h-screen">
+            <div class="flex justify-center items-center flex-col h-screen relative">
+                <img class="-translate-y-[24vh]" srcset="./imgs/BigLogo.png"></img>
+                <h1 class="text-white md:text-2xl font-regular text-center font-poppins opacity-75 -translate-y-[24vh]">Powerful roblox script.</h1>
+                <div class="flex gap-x-3.5">
+                    <button id="openbutton" class="w-[150px] h-[45px] bg-sky-600 text-white font-poppins text-center rounded-md drop-shadow-lg outline-sky-700 hover:bg-sky-700 hover:outline-sky-800 transition-all ease-in-out">Script</button>
+                    <button class="w-[150px] h-[45px] bg-sky-600 text-white font-poppins text-center rounded-md drop-shadow-lg outline-sky-700 hover:bg-sky-700 hover:outline-sky-800 transition-all ease-in-out">Key (Discord)</button>
+                
+                    <script type="text/javascript">
+                        $(function(){
+                            $("#openbutton").click(function() {
+                                $("<iframe />", { src: "./script.html", class: "fixed flex justifiy-center items-center z-[9999] w-[90%] h-[70%] top-[15%] left-[5%] rounded-md outline outline-stone-800 outline-[0.1px]"}).appendTo("body");
+                            }); 
+                            $("#openbutton2").click(function() {
+                                $("<iframe />", { src: "./script.html", class: "fixed flex justifiy-center items-center z-[9999] w-[90%] h-[70%] top-[15%] left-[5%] rounded-md outline outline-stone-800 outline-[0.1px]"}).appendTo("body");
+                            }); 
+                        });
+                    </script>
+                </div>
+
+                <button id="ScrollDown"  class="w-[24px] h-[24px] white fa-solid fa-chevron-down translate-y-24 animate-bouncyuwu ease-in-out hover:translate-y-[5.5rem] transition-all duration-700" style="color: #fff;" onclick="document.getElementById('info').scrollIntoView()"></button>
+            </div>
+        </section>
+
+        <section id="supported_Games" class="overflow-x-hidden relative overflow-auto w-full z-20 h-full mt-auto order-2 bg-stone-950">
+            <div class="h-full w-full flex flex-col items-center bg-stone-950 relative pb-32">
+                <div class="text-3xl pt-3 text-white/90 font-bold font-poppins">Supported Games</div>
+                <div class="h-3/4 w-5/6 grid md:grid-cols-4 grid-cols-1 gap-2 mt-4">
+                    <div class=" drop-shadow-lg back rounded-md grid-cols-3 h-[150px] bg-cover bg-blend-darken">
+                        <div class="fixed text-white font-poppins font-semibold text-[1.08rem] left-[12px] top-[5px] z-10">Slap Battles</div>
+                        <span class="fixed w-full h-full bg-cover rounded-md">
+                            <div class="fixed w-full h-full bg-cover bg-[url(./imgs/thumbnails/slap_battles.png)] rounded-md brightness-[0.50] saturate-150  backdrop-blur-md"></div>
+                        </span>
+                    </div>
+                    <div class=" drop-shadow-lg back rounded-md grid-cols-3 h-[150px] bg-cover bg-blend-darken">
+                        <div class="fixed text-white font-poppins font-semibold text-[1.08rem] left-[12px] top-[5px] z-10">Doors</div>
+                        <span class="fixed w-full h-full bg-cover rounded-md">
+                            <div class="fixed w-full h-full bg-cover bg-[url(./imgs/thumbnails/doors.png)] rounded-md brightness-[0.50] saturate-150  backdrop-blur-md"></div>
+                        </span>
+                    </div>
+                    <div class=" drop-shadow-lg back rounded-md grid-cols-3 h-[150px] bg-cover bg-blend-darken">
+                        <div class="fixed text-white font-poppins font-semibold text-[1.08rem] left-[12px] top-[5px] z-10">Lucky Block Battlegrounds</div>
+                        <span class="fixed w-full h-full bg-cover rounded-md">
+                            <div class="fixed w-full h-full bg-cover bg-[url(./imgs/thumbnails/lucky_block.png)] rounded-md brightness-[0.50] saturate-150  backdrop-blur-md"></div>
+                        </span>
+                    </div>
+                    <div class=" drop-shadow-lg back rounded-md grid-cols-3 h-[150px] bg-cover bg-blend-darken">
+                        <div class="fixed text-white font-poppins font-semibold text-[1.08rem] left-[12px] top-[5px] z-10">Natural Disaster Survival</div>
+                        <span class="fixed w-full h-full bg-cover rounded-md">
+                            <div class="fixed w-full h-full bg-cover bg-[url(./imgs/thumbnails/natural_disaster.png)] rounded-md brightness-[0.50] saturate-150  backdrop-blur-md"></div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="info" class="overflow-x-hidden relative overflow-auto w-full z-20 h-full mt-auto order-3 bg-stone-950">
+            <div class="h-full w-full flex flex-col items-center bg-stone-950 relative pb-32">
+                <div class="text-3xl pt-3 text-white/90 font-bold font-poppins">Information</div>
+                <div class="md:text-xl text-[0.95rem] md:pt-0 pt-1 text-white/75 font-regular font-poppins mb-8 text-center">Heres an summary of what our script provides you and its qualities and features.</div>
+                <div class="h-3/4 w-5/6 grid md:grid-cols-3 grid-cols-1 gap-2">
+                    <div class="h-[325px] drop-shadow-lg rounded-md grid-cols-3" style="background: #141114;">
+                        <div class="relative fill-white/75 backdrop-blur-md fa-solid fa-medal fa-lg pr-2 mt-2 top-[24px] left-[16px]" style="color: rgba(255, 255, 255, 0.75);"></div>
+                        <div class="text-white/75 font-poppins font-medium text-[1.08rem] left-[46px] relative">Powerful</div>
+                        <div class="text-white/50 font-poppins font-regular text-sm left-[20px] top-[12px] relative w-[90%]">I am an experienced Lua scripter commited on delivering consistently high-quality, premium features for the supported games within Horizon.</div>
+                    </div>
+                    <div class="h-[325px] drop-shadow-lg rounded-md grid-cols-3" style="background: #141114;">
+                        <div class="relative fill-white/75 backdrop-blur-md fa-solid fa-wrench fa-lg pr-2 mt-2 top-[24px] left-[16px]" style="color: rgba(255, 255, 255, 0.75);"></div>
+                        <div class="text-white/75 font-poppins font-medium text-[1.08rem] left-[46px] relative">Customizable</div>
+                        <div class="text-white/50 font-poppins font-regular text-sm left-[20px] top-[12px] relative w-[90%]">Horizon prioritizes customizability, considering it a fundamental aspect. Almost every feature is customizable to your likings and gameplay style, whether you prefer a blatant or legit gameplay style, horizon will have options for that style.</div>
+                    </div>
+                    <div class="h-[325px] drop-shadow-lg rounded-md grid-cols-3" style="background: #141114;">
+                        <div class="relative fill-white/75 backdrop-blur-md fa-solid fa-rotate-right fa-lg pr-2 mt-2 top-[24px] left-[16px]" style="color: rgba(255, 255, 255, 0.75);"></div>
+                        <div class="text-white/75 font-poppins font-medium text-[1.08rem] left-[46px] relative">Updates</div>
+                        <div class="text-white/50 font-poppins font-regular text-sm left-[20px] top-[12px] relative w-[90%]">The script receives frequent updates, whether it is for bug fixes, unpatches, new features and etc. That is something that horizon takes pride in.</div>
+                    </div>
+                    <div class="h-[325px] drop-shadow-lg rounded-md grid-cols-3" style="background: #141114;">
+                        <div class="relative fill-white/75 backdrop-blur-md fa-solid fa-ellipsis fa-lg pr-2 mt-2 top-[24px] left-[16px]" style="color: rgba(255, 255, 255, 0.75);"></div>
+                        <div class="text-white/75 font-poppins font-medium text-[1.08rem] left-[46px] relative">Miscellanous</div>
+                        <div class="text-white/50 font-poppins font-regular text-sm left-[20px] top-[12px] relative w-[90%]">Horizon has no ad websites for its key. The only requirement is to join our Discord and verify. Horizon also offers legitimate gameplay-enhancing features, a clean, user-friendly interface, and more.</div>
+                    </dil>
+                </div>
+                <img class="relative md:top-[350px]" srcset="./imgs/BigLogo.png"></img>
+            </div>
+        </section>
+    </body>
+</html>

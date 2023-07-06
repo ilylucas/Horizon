@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Horizon</title>
+        <link rel="stylesheet" href="./output.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    </head>
+    
+    <body onload="onLoad()" class="bg-iframe_primary/75 backdrop-blur-lg overflow-hidden">
+        <section class="h-screen w-full bg-transparent">
+            <img id="loading" class="fixed top-[45%] left-[45%] w-[80px] h-[80px] animate-customspin" srcset="./imgs/Loading.png"></img>
+            <img id="loading_pulse" class="fixed top-[43%] left-[44.5%] w-[100px] h-[100px] animate-pulse -z-1" srcset="./imgs/LoadingLogo.png"></img>
+
+            <div id="title" style="display: none;" class="fixed top-5 left-5 text-white font-poppins font-bold text-2xl">Script</div>
+            <button id="cls" style="display: none;" class="fixed fa-solid fa-xmark fa-2xl md:top-5 top-6 md:left-[97%] left-[90%] text-white/50 hover:text-white/90" onclick="closeUwu()"></button>
+            <div id="codeblock" style="display: none;" class="fixed w-[95%] h-[80%] top-[13%] left-[2.5%] bg-iframe_codeblock/75 rounded-md lang p-4 outline outline-white/10 outline-[0.1px] text-white/75" v-text="dataset.bibText">
+                <code class="md:w-[90%] w-[80%] fixed" style="word-wrap: break-word;">loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua", true))()</code>
+                <button class="fixed fa-solid fa-clipboard md:left-[95%] left-[90%] hover:text-sky-700 ease-in-out transition-all <!--hover:animate-pulse--> active:text-sky-400 duration-100" onclick="copyCode()"></button>
+            </div>
+            <script>
+                function copyCode() {
+                    navigator.clipboard.writeText('loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua", true))()')
+                }
+                function closeUwu() {
+                    frameElement.parentNode.removeChild(frameElement)
+                }
+            </script>
+        </section>
+        
+        <script type="text/javascript">
+            function onLoad() {
+                function rdnInt(min, max) { // min and max included 
+                    return Math.floor(Math.random() * (max - min + 1) + min)
+                }
+                const rdn = rdnInt(500, 3500)
+
+                function finishLoad(){
+                    document.getElementById("loading").style.display = 'none',
+                    document.getElementById("loading_pulse").style.display = 'none',
+                    document.getElementById("title").style.display = 'block',
+                    document.getElementById("cls").style.display = 'block',
+                    document.getElementById("codeblock").style.display = 'block'
+                }
+
+                window.setTimeout(finishLoad, rdn)
+            }
+        </script>
+    </body>
+</html>
