@@ -489,7 +489,7 @@ function Horizon:CreateNewGui(func)
             end)
 
             function ComponentFunctions:Toggle()
-                if Configuration.Active == false then
+                if Configuration.Active == (false or nil) then
                     Configuration.Active = true
 
                     Horizon:PlayTween(TweenService:Create(Toggle.Main.Inner, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Position = UDim2.new(0, 20, 0, 1)}))
