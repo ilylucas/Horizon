@@ -5,7 +5,7 @@
 
 -- Preloading
 
-getgenv().HorizonLoaded = true
+assert(getgenv().HorizonLoaded, "Failed to load horizon!")
 
 if shared.LastHorizon then
     shared.LastHorizon:Destroy()
@@ -130,6 +130,16 @@ function Horizon:Notify(Configuration)
     Notification.Size = UDim2.new(0, 0, 0, Notification.Content.TextBounds.Y + 26)
     Notification.Content.Size = UDim2.new(0, 264, 0, Notification.Content.TextBounds.Y)
     Notification.Visible = true
+
+	if Configuration.Icon then
+		Notification.Icon.ImageId = "rbxassetid://"..Configuration.Icon
+	end
+
+	if Configuration.Color then
+		Notification.Border.BackgroundColor3 = Configuration.Color
+		Notification.Border.CornerFix.BackgroundColor3 = Configuration.Color
+		Notification.Icon.ImagegroundColor3 = Configuration.Color
+	end
 
     local Sound = Instance.new("Sound")
     Sound.SoundId = "rbxassetid://8458409341"
