@@ -1,3 +1,7 @@
+--> TODO <--
+-- Fix tab button element names
+
+
 --[[
     Horizon UI Library
     Credits to Linoria and Rayfield libraries
@@ -5,7 +9,7 @@
 
 -- Preloading
 
-assert(getgenv().HorizonLoaded, "Failed to load horizon!")
+getgenv().HorizonLoaded = true
 
 if shared.LastHorizon then
     shared.LastHorizon:Destroy()
@@ -130,16 +134,6 @@ function Horizon:Notify(Configuration)
     Notification.Size = UDim2.new(0, 0, 0, Notification.Content.TextBounds.Y + 26)
     Notification.Content.Size = UDim2.new(0, 264, 0, Notification.Content.TextBounds.Y)
     Notification.Visible = true
-
-	if Configuration.Icon then
-		Notification.Icon.Image = "rbxassetid://"..Configuration.Icon
-	end
-
-	if Configuration.Color then
-		Notification.Border.BackgroundColor3 = Configuration.Color
-		Notification.Border.CornerFix.BackgroundColor3 = Configuration.Color
-		Notification.Icon.ImageColor3 = Configuration.Color
-	end
 
     local Sound = Instance.new("Sound")
     Sound.SoundId = "rbxassetid://8458409341"
@@ -307,6 +301,9 @@ function Horizon:CreateNewGui(func)
     local FirstTab = true
     local Tabs = {}
 
+    TabList.Visible = true
+    Components.Visible = false
+
     Components.Parent = nil
 
     Sidebar.InputBegan:Connect(function()
@@ -416,6 +413,30 @@ function Horizon:CreateNewGui(func)
 
             table.insert(TabData.Elements, Section)
         end
+
+        -- Label
+        function TabData:AddLabel(ContentLabel)
+            local Label = Components.Label:Clone()
+            Label.Title.Text = ContentLabel
+            Label.Parent = Page
+            Label.Size = UDim2.new(0.99, 0, 0, Label.Title.TextBounds.Y + 31)
+            Label.Visible = true
+
+            task.spawn(function()
+                Label.BackgroundTransparency = 1
+                Label.Title.TextTransparency = 1
+                repeat task.wait() until FadeCached == false
+                FadeCached = true
+                task.delay(0.1, function()
+                    FadeCached = false
+                end)
+
+                Horizon:PlayTween(TweenService:Create(Label, TweenInfo.new(1, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}))
+                Horizon:PlayTween(TweenService:Create(Label.Title, TweenInfo.new(1, Enum.EasingStyle.Quint), {TextTransparency = 0}))
+            end)
+
+            table.insert(TabData.Elements, Section)
+        end
         
         -- Button
         function TabData:AddButton(Name, Configuration)
@@ -455,6 +476,114 @@ function Horizon:CreateNewGui(func)
             table.insert(TabData.Elements, Button)
         end
 
+        -- Keybind
+        function TabData:AddKeybind(Name, Configuration)
+            local Keybind = Components.Keybind:Clone()
+            Keybind.Title.Text = Name
+            Keybind.Main.Text = Configuration.CurrentKeybind.Name
+            Keybind.Parent = Page
+            Keybind.Visible = true
+
+            task.spawn(function()
+                Keybind.BackgroundTransparency = 1
+                Keybind.Title.TextTransparency = 1
+                Keybind.Main.TextTransparency = 1
+                Keybind.Main.BackgroundTransparency = 1
+                repeat task.wait() until FadeCached == false
+                FadeCached = true
+                task.delay(0.1, function()
+                    FadeCached = false
+                end)
+
+                Horizon:PlayTween(TweenService:Create(Keybind, TweenInfo.new(1, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}))
+                Horizon:PlayTween(TweenService:Create(Keybind.Title, TweenInfo.new(1, Enum.EasingStyle.Quint), {TextTransparency = 0}))
+                Horizon:PlayTween(TweenService:Create(Keybind.Main, TweenInfo.new(1, Enum.EasingStyle.Quint), {TextTransparency = 0}))
+                Horizon:PlayTween(TweenService:Create(Keybind.Main, TweenInfo.new(1, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}))
+            end)
+
+            Keybind.MouseEnter:Connect(function()
+                Horizon:PlayTween(TweenService:Create(Keybind, TweenInfo.new(0.3, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(30, 30, 30)}))
+
+                Keybind.MouseLeave:Wait()
+                Horizon:PlayTween(TweenService:Create(Keybind, TweenInfo.new(0.3, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(20, 20, 20)}))
+            end)
+
+            Keybind.Main.Focused:Connect(function()
+                Keybind.Main.Text = "..."
+
+                local Connection
+                Connection = UserInputService.InputBegan:Connect(function(Input)
+                    if Input.KeyCode ~= Enum.KeyCode.Unknown then
+                        Keybind.Main:ReleaseFocus()
+                        Keybind.Main.Text = Input.KeyCode.Name
+                        Configuration.CurrentKeybind = Input.KeyCode
+
+                        Connection:Disconnect()
+                    end
+                end)
+            end)
+
+            UserInputService.InputBegan:Connect(function(Input, Chatting)
+                if Input.KeyCode == Configuration.CurrentKeybind and not Chatting then
+                    Configuration.Callback()
+                end
+            end)
+
+            table.insert(TabData.Elements, Keybind)
+        end
+
+        -- Input
+        function TabData:AddInput(Name, Configuration)
+            local Input = Components.Input:Clone()
+            Input.Title.Text = Name
+            Input.Main.Text = Configuration.DefaultInput
+            Input.Main.PlaceholderText = ""
+            Input.Parent = Page
+            Input.Visible = true
+
+            Horizon:PlayTween(TweenService:Create(Input.Main, TweenInfo.new(0.2, Enum.EasingStyle.Quint), {Size = UDim2.new(0, Input.Main.TextBounds.X + 18, 0, 27)}))
+
+            task.spawn(function()
+                Input.BackgroundTransparency = 1
+                Input.Title.TextTransparency = 1
+                Input.Main.TextTransparency = 1
+                Input.Main.BackgroundTransparency = 1
+                repeat task.wait() until FadeCached == false
+                FadeCached = true
+                task.delay(0.1, function()
+                    FadeCached = false
+                end)
+
+                Horizon:PlayTween(TweenService:Create(Input, TweenInfo.new(1, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}))
+                Horizon:PlayTween(TweenService:Create(Input.Title, TweenInfo.new(1, Enum.EasingStyle.Quint), {TextTransparency = 0}))
+                Horizon:PlayTween(TweenService:Create(Input.Main, TweenInfo.new(1, Enum.EasingStyle.Quint), {TextTransparency = 0}))
+                Horizon:PlayTween(TweenService:Create(Input.Main, TweenInfo.new(1, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}))
+            end)
+
+            Input.MouseEnter:Connect(function()
+                Horizon:PlayTween(TweenService:Create(Input, TweenInfo.new(0.3, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(30, 30, 30)}))
+
+                Input.MouseLeave:Wait()
+                Horizon:PlayTween(TweenService:Create(Input, TweenInfo.new(0.3, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(20, 20, 20)}))
+            end)
+
+            Input.Main:GetPropertyChangedSignal("Text"):Connect(function()
+                Horizon:PlayTween(TweenService:Create(Input.Main, TweenInfo.new(0.2, Enum.EasingStyle.Quint), {Size = UDim2.new(0, Input.Main.TextBounds.X + 18, 0, 27)}))
+            end)
+
+            Input.Main.ClearTextOnFocus = Configuration.ClearTextOnFocus
+
+            Input.Main.Focused:Connect(function()
+                Input.Main.Text = ""
+
+                Input.Main.FocusEnded:Connect(function()
+                    Configuration.Callback(Input.Main.Text)
+                end)
+            end)
+
+            table.insert(TabData.Elements, Input)
+        end
+
         -- Toggle
         function TabData:AddToggle(Name, Configuration)
             local Toggle = Components.Toggle:Clone()
@@ -489,7 +618,7 @@ function Horizon:CreateNewGui(func)
             end)
 
             function ComponentFunctions:Toggle()
-                if not Configuration.Active or Configuration.Active == false then
+                if Configuration.Active == false then
                     Configuration.Active = true
 
                     Horizon:PlayTween(TweenService:Create(Toggle.Main.Inner, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Position = UDim2.new(0, 20, 0, 1)}))
@@ -819,10 +948,7 @@ function Horizon:CreateNewGui(func)
             Horizon:PlayTween(.1, TweenService:Create(Main, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 600, 0, 375)}))
             Horizon:PlayTween(.1, TweenService:Create(Main, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundTransparency = 1}))
             Horizon:PlayTween(TweenService:Create(Main.DropShadow, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {ImageTransparency = 1}))
-
-		task.delay(0.6, function()
-			Visible = false
-		end)
+            Visible = false
 
             Horizon:Notify({
                 Content = 'Press "V" to show the ui back',
@@ -838,8 +964,8 @@ function Horizon:CreateNewGui(func)
             task.delay(0.6, function()
                 Main.Topbar.ClipsDescendants = false
                 Main.Tabs.Visible = true
-            	Visible = true
             end)
+            Visible = true
         end
     end
 
