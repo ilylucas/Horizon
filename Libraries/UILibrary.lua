@@ -132,7 +132,7 @@ function Horizon:Notify(Configuration)
     Notification.Visible = true
 
 	if Configuration.Icon then
-		Notification.Icon.ImageId = "rbxassetid://"..Configuration.Icon
+		Notification.Icon.Image = "rbxassetid://"..Configuration.Icon
 	end
 
 	if Configuration.Color then
