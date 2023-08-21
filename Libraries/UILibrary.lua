@@ -819,7 +819,10 @@ function Horizon:CreateNewGui(func)
             Horizon:PlayTween(.1, TweenService:Create(Main, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 600, 0, 375)}))
             Horizon:PlayTween(.1, TweenService:Create(Main, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundTransparency = 1}))
             Horizon:PlayTween(TweenService:Create(Main.DropShadow, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {ImageTransparency = 1}))
-            Visible = false
+
+		task.delay(0.6, function()
+			Visible = false
+		end)
 
             Horizon:Notify({
                 Content = 'Press "V" to show the ui back',
@@ -835,8 +838,8 @@ function Horizon:CreateNewGui(func)
             task.delay(0.6, function()
                 Main.Topbar.ClipsDescendants = false
                 Main.Tabs.Visible = true
+            	Visible = true
             end)
-            Visible = true
         end
     end
 
