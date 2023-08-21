@@ -138,7 +138,7 @@ function Horizon:Notify(Configuration)
 	if Configuration.Color then
 		Notification.Border.BackgroundColor3 = Configuration.Color
 		Notification.Border.CornerFix.BackgroundColor3 = Configuration.Color
-		Notification.Icon.ImagegroundColor3 = Configuration.Color
+		Notification.Icon.ImageColor3 = Configuration.Color
 	end
 
     local Sound = Instance.new("Sound")
