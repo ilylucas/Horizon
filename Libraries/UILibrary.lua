@@ -148,7 +148,7 @@ function Horizon:Notify(Configuration)
     Horizon:PlayTween(TweenService:Create(Notification, TweenInfo.new(0.8, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 0, 0, Notification.Content.TextBounds.Y + 26)}))
 end
 
-function Horizon:CreateNewGui(func)
+function Horizon:CreateNewGui(func, modal)
     local ProtectGui = protectgui or (syn and syn.protect_gui) or (function() end)
 
     Interface.Parent = CoreGui
@@ -266,6 +266,10 @@ function Horizon:CreateNewGui(func)
     end
 
     Main.Topbar.MoreDropdown.DropShadow.ImageTransparency = 1
+
+	if modal then
+		Main.Topbar.Close.Modal = true
+	end
 
     Main.Topbar.More.MouseButton1Click:Connect(function()
         if Main.Topbar.MoreDropdown.Size == UDim2.new(0, 171, 0, 0) then
