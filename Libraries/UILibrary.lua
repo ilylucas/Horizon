@@ -938,9 +938,12 @@ function Horizon:CreateNewGui(func, modal)
     end
 
     local Visible = true
+    local Debounce = false
 
     function ToggleVisibility()
+        if Debounce then return end
         if Visible == true then
+            Debounce = true
             Main.Topbar.ClipsDescendants = true
             Main.Tabs.Visible = false
             Horizon:PlayTween(TweenService:Create(Main.Sidebar, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 0, 0.896, 0)}))
@@ -949,27 +952,33 @@ function Horizon:CreateNewGui(func, modal)
             Horizon:PlayTween(.1, TweenService:Create(Main, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundTransparency = 1}))
             Horizon:PlayTween(TweenService:Create(Main.DropShadow, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {ImageTransparency = 1}))
 
-		task.delay(0.6, function()
-			Visible = false
-			Main.Topbar.Close.Visible = false
-		end
+            task.delay(0.6, function()
+                Debounce = false
+                Visible = false
+                Main.Topbar.Close.Visible = false
+            end)
 
             Horizon:Notify({
                 Content = 'Press "V" to show the ui back',
                 Duration = 3
             })
         else
-            Main.Tabs.Visible = true
-		Main.Topbar.Close.Visible = true
+            Debounce = true
             Horizon:PlayTween(TweenService:Create(Main.Sidebar, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 50, 0.896, 0)}))
             Horizon:PlayTween(TweenService:Create(Main.Topbar, TweenInfo.new(0.4, Enum.EasingStyle.Quint), {Size = UDim2.new(1, 0, 0, 40)}))
             Horizon:PlayTween(TweenService:Create(Main, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {Size = UDim2.new(0, 685, 0, 425)}))
             Horizon:PlayTween(TweenService:Create(Main, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}))
             Horizon:PlayTween(TweenService:Create(Main.DropShadow, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {ImageTransparency = 0.4}))
             task.delay(0.6, function()
+                Debounce = false
                 Main.Topbar.ClipsDescendants = false
-                Main.Tabs.Visible = true
+                Main.Topbar.Close.Visible = true
             	Visible = true
+            end)
+
+            task.delay(0.2, function()
+                
+                Main.Tabs.Visible = true
             end)
         end
     end
