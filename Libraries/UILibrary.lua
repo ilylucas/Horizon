@@ -1,7 +1,3 @@
---> TODO <--
--- Fix tab button element names
-
-
 --[[
     Horizon UI Library
     Credits to Linoria and Rayfield libraries
