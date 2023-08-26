@@ -940,6 +940,13 @@ function Horizon:CreateNewGui(func, modal)
     local Visible = true
     local Debounce = false
 
+    local MouseConnection
+    if modal then
+        MouseConnection = RunService.RenderStepped:Conenct(function()
+            UserInputService.MouseIconEnabled = true
+        end)
+    end
+
     function ToggleVisibility()
         if Debounce then return end
         if Visible == true then
@@ -953,6 +960,7 @@ function Horizon:CreateNewGui(func, modal)
             Horizon:PlayTween(TweenService:Create(Main.DropShadow, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {ImageTransparency = 1}))
 
             task.delay(0.6, function()
+                if MouseConnection then MouseConnection:Disconnect() end
                 Debounce = false
                 Visible = false
                 Main.Topbar.Close.Visible = false
@@ -970,6 +978,12 @@ function Horizon:CreateNewGui(func, modal)
             Horizon:PlayTween(TweenService:Create(Main, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}))
             Horizon:PlayTween(TweenService:Create(Main.DropShadow, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {ImageTransparency = 0.4}))
             task.delay(0.6, function()
+                if modal then
+                    MouseConnection = RunService.RenderStepped:Conenct(function()
+                        UserInputService.MouseIconEnabled = true
+                    end)
+                end
+                
                 Debounce = false
                 Main.Topbar.ClipsDescendants = false
                 Main.Topbar.Close.Visible = true
@@ -977,7 +991,6 @@ function Horizon:CreateNewGui(func, modal)
             end)
 
             task.delay(0.2, function()
-                
                 Main.Tabs.Visible = true
             end)
         end
