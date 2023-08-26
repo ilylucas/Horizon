@@ -961,6 +961,7 @@ function Horizon:CreateNewGui(func, modal)
 
             task.delay(0.6, function()
                 if MouseConnection then MouseConnection:Disconnect() end
+		UserInputService.MouseIconEnabled = false
                 Debounce = false
                 Visible = false
                 Main.Topbar.Close.Visible = false
