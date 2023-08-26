@@ -153,6 +153,18 @@ function Horizon:CreateNewGui(func, modal)
     local Main = Interface.Main
     local Loading = Main.Loading
 
+    local MouseConnection
+    if modal then
+        MouseConnection = RunService.RenderStepped:Connect(function()
+            UserInputService.MouseIconEnabled = true
+        end)
+    end
+
+    if modal then
+		Main.Topbar.Close.Modal = true
+        Main.Loading.Key.Login.Modal = true
+	end
+
     Horizon:PlayTween(TweenService:Create(Main, TweenInfo.new(0.9, Enum.EasingStyle.Quint), {Size = Main:GetAttribute("LoadingSize")}))
         Horizon:PlayTween(TweenService:Create(Main, TweenInfo.new(0.9, Enum.EasingStyle.Quint), {BackgroundTransparency = 0}))
         Horizon:PlayTween(TweenService:Create(Main.DropShadow, TweenInfo.new(1.65, Enum.EasingStyle.Quint), {ImageTransparency = 0.4}))
@@ -262,10 +274,6 @@ function Horizon:CreateNewGui(func, modal)
     end
 
     Main.Topbar.MoreDropdown.DropShadow.ImageTransparency = 1
-
-	if modal then
-		Main.Topbar.Close.Modal = true
-	end
 
     Main.Topbar.More.MouseButton1Click:Connect(function()
         if Main.Topbar.MoreDropdown.Size == UDim2.new(0, 171, 0, 0) then
@@ -940,13 +948,6 @@ function Horizon:CreateNewGui(func, modal)
     local Visible = true
     local Debounce = false
 
-    local MouseConnection
-    if modal then
-        MouseConnection = RunService.RenderStepped:Connect(function()
-            UserInputService.MouseIconEnabled = true
-        end)
-    end
-
     function ToggleVisibility()
         if Debounce then return end
         if Visible == true then
@@ -961,7 +962,6 @@ function Horizon:CreateNewGui(func, modal)
 
             task.delay(0.6, function()
                 if MouseConnection then MouseConnection:Disconnect() end
-		UserInputService.MouseIconEnabled = false
                 Debounce = false
                 Visible = false
                 Main.Topbar.Close.Visible = false
