@@ -942,7 +942,7 @@ function Horizon:CreateNewGui(func, modal)
 
     local MouseConnection
     if modal then
-        MouseConnection = RunService.RenderStepped:Conenct(function()
+        MouseConnection = RunService.RenderStepped:Connect(function()
             UserInputService.MouseIconEnabled = true
         end)
     end
@@ -979,11 +979,11 @@ function Horizon:CreateNewGui(func, modal)
             Horizon:PlayTween(TweenService:Create(Main.DropShadow, TweenInfo.new(0.6, Enum.EasingStyle.Quint), {ImageTransparency = 0.4}))
             task.delay(0.6, function()
                 if modal then
-                    MouseConnection = RunService.RenderStepped:Conenct(function()
+                    MouseConnection = RunService.RenderStepped:Connect(function()
                         UserInputService.MouseIconEnabled = true
                     end)
                 end
-                
+
                 Debounce = false
                 Main.Topbar.ClipsDescendants = false
                 Main.Topbar.Close.Visible = true
