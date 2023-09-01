@@ -883,6 +883,9 @@ function Horizon:CreateNewGui(func, modal)
                         end
 
                         ComponentLibrary:Update()
+
+			 Horizon:PlayTween(TweenService:Create(Dropdown, TweenInfo.new(0.3, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(20, 20, 20)}))
+                    	Horizon:PlayTween(TweenService:Create(Dropdown, TweenInfo.new(0.9, Enum.EasingStyle.Quint), {Size = UDim2.new(0.99, 0, 0, 45)}))
                     end)
                 end
             end
@@ -932,6 +935,9 @@ function Horizon:CreateNewGui(func, modal)
                     end
 
                     ComponentLibrary:Update()
+
+			Horizon:PlayTween(TweenService:Create(Dropdown, TweenInfo.new(0.3, Enum.EasingStyle.Quint), {BackgroundColor3 = Color3.fromRGB(20, 20, 20)}))
+                    Horizon:PlayTween(TweenService:Create(Dropdown, TweenInfo.new(0.9, Enum.EasingStyle.Quint), {Size = UDim2.new(0.99, 0, 0, 45)}))
                 end)
             end
 
